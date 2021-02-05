@@ -26,6 +26,11 @@ Route::get('/starting_page', function () {
     return view('starting_page');
 });
 
+/* Route::get('/test/{id}/name/{name}', 'HobbyController@index');  */
+
+// 'hobby' is name route 
+Route::resource('hobby', 'HobbyController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
