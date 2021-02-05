@@ -5,10 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="description" content="@yield('page_description', 'Home page Laravel')">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>@yield('page_title', 'Home Page')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -42,10 +45,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('/info') ? 'active': '' }}active" href="/info">Info</a>
+                            <a class="nav-link {{ Request::is('info') ? ' active': '' }}" href="/info">Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('/info') ? 'active': '' }}" href="/starting_page">Starting
+                            <a class="nav-link {{ Request::is('starting_page') ? ' active': '' }}"
+                                href="/starting_page">Starting
                                 Page</a>
                         </li>
                     </ul>

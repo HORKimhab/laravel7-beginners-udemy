@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_title', 'Information')
+
+@section('page_description', 'Description about Laravel')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
