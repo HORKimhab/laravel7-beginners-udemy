@@ -84,9 +84,13 @@
 
         <div class="content">
             <div class="title m-b-md">
-                {{-- Output User name --}}
-                Hello {{ auth()->user()->name }}, Learning Laravel
+                {{-- Output User name | Condition with ?? --}}
+                {{-- {{ auth()->user()->name == <?php echo auth()->user()->name ?? ''?> }} --}}
+                Hello {{ auth()->user()->name ?? ''}}, Learning Laravel
             </div>
+            {{-- Unescapse HTML in laravel blade --}}
+            {{-- {!! "<b>This is laravel 7</b>" !!} --}}
+            {{-- {!! "<script>alert('Now you learning Laravel 7')</script>" !!} --}}
 
             <div class="links">
                 <a href="https://laravel.com/docs">Docs</a>
