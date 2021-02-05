@@ -6,6 +6,11 @@
 
 require('./bootstrap');
 
+/* Customize Own JavaScript */
+/* custom is file javascript: custom.js */
+require('./custom');
+
+
 window.Vue = require('vue');
 
 /**

@@ -1,8 +1,9 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
+// /* Customize Own JavaScript */
+// custom is file name in folder resource/js/custom.js
+@import 'custom';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
