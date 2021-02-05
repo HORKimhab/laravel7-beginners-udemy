@@ -22,7 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- Customize Styles CSS --}}
-    {{-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -41,7 +41,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('/info') ? 'active': '' }}active" href="/info">Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('/info') ? 'active': '' }}" href="/starting_page">Starting
+                                Page</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
