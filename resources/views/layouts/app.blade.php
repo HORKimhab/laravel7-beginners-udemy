@@ -13,7 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     {{-- Customize JavaScript --}}
-    <script src="{{ asset('js/custom.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/custom.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,7 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- Customize Styles CSS --}}
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body>
@@ -87,4 +87,3 @@
 </body>
 
 </html>
-
