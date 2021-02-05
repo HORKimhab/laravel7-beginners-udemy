@@ -84,7 +84,8 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Hello Laravel
+                {{-- Output User name --}}
+                Hello {{ auth()->user()->name }}, Learning Laravel
             </div>
 
             <div class="links">
