@@ -12,9 +12,16 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id, $name)
+    public function index()
     {
-        dd('Hey ' . $id . $name); 
+        $hobbies = Hobby::all();
+        // dd($hobby);
+
+        $data = [
+            'hobbies'=> $hobbies
+        ];
+
+        return view('hobby.index')->with($data);
     }
 
     /**
@@ -24,7 +31,7 @@ class HobbyController extends Controller
      */
     public function create()
     {
-        //
+        return view('hobby.create');
     }
 
     /**

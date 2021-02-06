@@ -52,6 +52,9 @@
                                 href="/starting_page">Starting
                                 Page</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('hobby*') ? ' active': '' }}" href="/hobby">Hobby</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

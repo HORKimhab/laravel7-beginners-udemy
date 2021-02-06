@@ -28,7 +28,8 @@ Route::get('/starting_page', function () {
 
 /* Route::get('/test/{id}/name/{name}', 'HobbyController@index');  */
 
-// 'hobby' is name route 
+// 'hobby' is name route
+// More about Route::resource --> https://laravel.com/docs/7.x/controllers
 Route::resource('hobby', 'HobbyController');
 
 Auth::routes();
