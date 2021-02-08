@@ -94,6 +94,20 @@
         </nav>
 
         <main class="py-4">
+            {{-- Display The Validation Errors: https://laravel.com/docs/7.x/validation#quick-displaying-the-validation-errors --}}
+            @if ($errors->any())
+            <div class="container">
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li> {{-- Support html as string in validation.php --}}
+                        {{-- <li>{{  $error  }}</li> --}} {{-- Doesn't Support html as string in validation.php --}}
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+
             @yield('content')
         </main>
     </div>

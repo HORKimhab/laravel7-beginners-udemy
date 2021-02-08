@@ -42,6 +42,12 @@ class HobbyController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation: https://laravel.com/docs/7.x/validation
+        $request->validate([
+            'name'=>'required|min:8',
+            'description'=>'required|min:8',
+        ]);
+
         $hobby = new Hobby([
             'name'          => $request->name,  /* $request['name'] */
             'description'   => $request['description'],
