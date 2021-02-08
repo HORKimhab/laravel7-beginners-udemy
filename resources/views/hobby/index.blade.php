@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="mt-2">
-                <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i
-                        class="fas fa-plus-circle"></i>Create new Hobby</a>
+                <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i class="fas fa-plus-circle"></i>
+                    Create new Hobby</a>
             </div>
 
         </div>
