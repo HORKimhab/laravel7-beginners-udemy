@@ -70,7 +70,7 @@ class HobbyController extends Controller
     public function show(Hobby $hobby)
     {
         return view('hobby.show')->with([
-            'hobby'=>$hobby,
+            'hobby' => $hobby,
         ]);
     }
 
@@ -82,7 +82,9 @@ class HobbyController extends Controller
      */
     public function edit(Hobby $hobby)
     {
-        //
+        return view('hobby.edit')->with([
+            'hobby' => $hobby,
+        ]);
     }
 
     /**
