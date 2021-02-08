@@ -96,7 +96,21 @@ class HobbyController extends Controller
      */
     public function update(Request $request, Hobby $hobby)
     {
-        //
+        // Validation: https://laravel.com/docs/7.x/validation
+        $request->validate([
+            'name'=>'required|min:8',
+            'description'=>'required|min:8',
+        ]);
+
+        $hobby->update([
+            'name'          => $request->name,  /* $request['name'] */
+            'description'   => $request['description'],
+        ]);
+
+        /* return $this->index(); */ /* Confirm Form Resubmission */
+        return redirect()->route('hobby.index')->with([
+            'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is updated successfully.',
+        ]);
     }
 
     /**

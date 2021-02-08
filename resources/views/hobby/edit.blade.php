@@ -7,7 +7,9 @@
             <div class="card">
                 <div class="card-header">Edit Hobby</div>
                 <div class="card-body">
-                    <form action="/hobby" method="POST">
+                    <form action="/hobby/{{ $hobby->id }}" method="POST">
+                        {{-- More: https://laravel.com/docs/7.x/routing#form-method-spoofing --}}
+                        @method('PUT')
                         @csrf {{-- 01 --}}
 
                         {{-- Equaivalent to 01 --}}
