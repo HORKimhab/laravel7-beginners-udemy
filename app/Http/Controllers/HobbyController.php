@@ -14,7 +14,7 @@ class HobbyController extends Controller
      */
     public function index()
     {
-        $hobbies = Hobby::all();
+        $hobbies = Hobby::all()->where('is_delete', 0);
         // dd($hobby);
 
         $data = [
