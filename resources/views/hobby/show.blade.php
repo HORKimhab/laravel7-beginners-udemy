@@ -7,23 +7,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Detail Hobby') }}</div>
 
                 <div class="card-body">
                     {{-- list-group: -->https://getbootstrap.com/docs/4.0/components/list-group/ --}}
                     {{-- Loop | Foreach -->https://laravel.com/docs/master/blade#loops --}}
 
                     <ul class="list-group">
-                        @foreach($hobbies as $hobby)
-                        {{-- <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li> --}}
                         <li class="list-group-item">
-                            <a href="/hobby/{{$hobby->id}}">{{ $hobby->name }}</a>
+                            <b>{{$hobby->name}}</b>
+                            <p>{{$hobby->description}}</p>
                         </li>
-                        @endforeach
                     </ul>
                 </div>
             </div>
