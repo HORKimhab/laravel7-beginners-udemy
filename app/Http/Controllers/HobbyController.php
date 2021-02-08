@@ -56,7 +56,9 @@ class HobbyController extends Controller
         // dd($hobby);
         $hobby->save();
         /* return $this->index(); */ /* Confirm Form Resubmission */
-        return redirect()->route('hobby.index');
+        return redirect()->route('hobby.index')->with([
+            'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is created successfully.',
+        ]);
     }
 
     /**

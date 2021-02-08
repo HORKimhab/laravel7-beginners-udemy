@@ -94,6 +94,16 @@
         </nav>
 
         <main class="py-4">
+            {{-- https://laravel.com/docs/7.x/blade#if-statements --}}
+            {{-- https://www.itsolutionstuff.com/post/laravel-6-flash-message-tutorialexample.html --}}
+            @if ($mgs_success = Session::get('mgs_success'))
+            <div class="container">
+                <div class="alert alert-success" role="alert">
+                    {!! $mgs_success !!}
+                </div>
+            </div>
+            @endif
+
             {{-- Display The Validation Errors: https://laravel.com/docs/7.x/validation#quick-displaying-the-validation-errors --}}
             @if ($errors->any())
             <div class="container">
