@@ -21,7 +21,10 @@
                             <li class="list-group-item">Porta ac consectetur ac</li>
                             <li class="list-group-item">Vestibulum at eros</li> --}}
                         <li class="list-group-item">
-                            <a href="/hobby/{{$hobby->id}}">{{ $hobby->name }}</a>
+                            <a href="/hobby/{{$hobby->id}}" title="Show Details">{{ $hobby->name }}</a>
+                            <a href="hobby/{{$hobby->id}}/edit" title="Click to Edit Hobby"
+                                class="btn btn-light ml-1"><i class="far fa-edit"></i> Edit
+                                Hobby</a>
                         </li>
                         @endforeach
                     </ul>
