@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsDeteleToUsersTable extends Migration
+class AddUserIdToHobbiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class AddIsDeteleToUsersTable extends Migration
     public function up()
     {
         Schema::table('hobbies', function (Blueprint $table) {
-            /*  - https://laravel.com/docs/7.x/migrations#creating-tables
-                - https://laravel.com/docs/7.x/migrations#generating-migrations
-            */
-            $table->boolean('is_delete')->nullable()->default(0)->after('description');
-            /* after: https://stackoverflow.com/questions/20982538/add-sql-table-column-before-or-after-specific-other-column-by-migrations-in-la */
+            $table->unsignedBigInteger('user_id')
+            ->after('id')->nullable();
+            $table->foreign('user_id')
+            ->references('id')
+            ->on("users")
+            ->onDelete('cascade'); /* If user is delete hobbies also deleted too */
         });
     }
 
@@ -30,7 +31,8 @@ class AddIsDeteleToUsersTable extends Migration
     public function down()
     {
         Schema::table('hobbies', function (Blueprint $table) {
-            //
+            $table->dropForeign(['user_id']);
+            $table->dropColumn(['user_id']);
         });
     }
 }
