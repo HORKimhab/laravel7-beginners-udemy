@@ -123,6 +123,7 @@ class HobbyController extends Controller
     public function destroy(Hobby $hobby)
     {
         $oldName = $hobby->name;
+        /* https://laravel.com/docs/7.x/queries#retrieving-results */
         $delete_hobby = DB::table('hobbies')->where('id', $hobby->id)->update(['is_delete'=>1]);
         return redirect()->route('hobby.index')->with([
             'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is deleted successfully.',
