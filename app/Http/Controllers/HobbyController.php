@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hobby;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HobbyController extends Controller
 {
@@ -121,6 +122,10 @@ class HobbyController extends Controller
      */
     public function destroy(Hobby $hobby)
     {
-        //
+        $oldName = $hobby->name;
+        $delete_hobby = DB::table('hobbies')->where('id', $hobby->id)->update(['is_delete'=>1]);
+        return redirect()->route('hobby.index')->with([
+            'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is deleted successfully.',
+        ]);
     }
 }

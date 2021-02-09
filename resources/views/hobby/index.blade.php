@@ -25,6 +25,11 @@
                             <a href="/hobby/{{$hobby->id}}/edit" title="Click to Edit Hobby"
                                 class="btn btn-light ml-1"><i class="far fa-edit"></i> Edit
                                 Hobby</a>
+                            <form action="/hobby/{{$hobby->id}}" method="POST" class="float-right">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-outline-danger" type="submit" value="Delete">
+                            </form>
                         </li>
                         @endforeach
                     </ul>
