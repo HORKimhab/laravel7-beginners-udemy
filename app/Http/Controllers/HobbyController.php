@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Hobby;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HobbyController extends Controller
 {
@@ -17,6 +18,7 @@ class HobbyController extends Controller
     {
         $hobbies = Hobby::all()->where('is_delete', 0);
         // dd($hobby);
+
 
         $data = [
             'hobbies'=> $hobbies
@@ -45,7 +47,7 @@ class HobbyController extends Controller
     {
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
-            'name'=>'required|min:8',
+            'name'=>'required|min:3',
             'description'=>'required|min:8',
         ]);
 
@@ -99,7 +101,7 @@ class HobbyController extends Controller
     {
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
-            'name'=>'required|min:8',
+            'name'=>'required|min:3',
             'description'=>'required|min:8',
         ]);
 
