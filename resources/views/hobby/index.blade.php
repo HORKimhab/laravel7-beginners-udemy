@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -26,13 +26,17 @@
                             <a href="/hobby/{{$hobby->id}}/edit" title="Click to Edit Hobby"
                                 class="btn btn-light ml-1"><i class="far fa-edit"></i> Edit
                                 Hobby</a>
+                            @endauth
+                            <span class="mx-1">Posted by: {{ $hobby->user->name }}
+                                ({{ $hobby->user->hobbies->count() }})</span>
+                            @auth
                             <form action="/hobby/{{$hobby->id}}" method="POST" class="float-right">
                                 @csrf
                                 @method('DELETE')
                                 <input class="btn btn-outline-danger" type="submit" value="Delete">
                             </form>
                             @endauth
-                            <span class="float-right mr-1">{{ $hobby->created_at->diffForHumans() }}</span>
+                            <span class="float-right mx-1">{{ $hobby->created_at->diffForHumans() }}</span>
                         </li>
                         @endforeach
                     </ul>
