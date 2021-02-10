@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class HobbyController extends Controller
 {
+    // Check Login
+    // https://laravel.com/docs/7.x/authentication#protecting-routes
+    public function __construct(){
+        $this->middleware('auth')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -55,6 +60,7 @@ class HobbyController extends Controller
         $hobby = new Hobby([
             'name'          => $request->name,  /* $request['name'] */
             'description'   => $request['description'],
+            'user_id' => auth()->id(),
         ]);
 
         // dd($hobby);
@@ -109,6 +115,7 @@ class HobbyController extends Controller
         $hobby->update([
             'name'          => $request->name,  /* $request['name'] */
             'description'   => $request['description'],
+            'user_id' => auth()->id(),
         ]);
 
         /* return $this->index(); */ /* Confirm Form Resubmission */

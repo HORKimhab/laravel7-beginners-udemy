@@ -22,6 +22,7 @@
                             <li class="list-group-item">Vestibulum at eros</li> --}}
                         <li class="list-group-item">
                             <a href="/hobby/{{$hobby->id}}" title="Show Details">{{ $hobby->name }}</a>
+                            @auth {{-- Need login to see these feature --}}
                             <a href="/hobby/{{$hobby->id}}/edit" title="Click to Edit Hobby"
                                 class="btn btn-light ml-1"><i class="far fa-edit"></i> Edit
                                 Hobby</a>
@@ -30,6 +31,7 @@
                                 @method('DELETE')
                                 <input class="btn btn-outline-danger" type="submit" value="Delete">
                             </form>
+                            @endauth
                         </li>
                         @endforeach
                     </ul>
@@ -38,10 +40,12 @@
             <div class="mt-2">
                 {{ $hobbies->links() }}
             </div>
+            @auth
             <div class="mt-2">
                 <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i class="fas fa-plus-circle"></i>
                     Create new Hobby</a>
             </div>
+            @endauth
 
         </div>
     </div>
