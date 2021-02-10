@@ -23,7 +23,8 @@ class HobbyController extends Controller
     {
         /* Paginate: https://laravel.com/docs/7.x/pagination#paginating-eloquent-results */
         // $hobbies = Hobby::all()->where('is_delete', 0);
-        $hobbies = Hobby::where('is_delete', 0)->paginate(10);
+        // $hobbies = Hobby::where('is_delete', 0)->paginate(10);
+        $hobbies = Hobby::where('is_delete', 0)->orderBy('created_at', 'DESC')->paginate(10);
         // dd($hobby);
 
         $data = [
