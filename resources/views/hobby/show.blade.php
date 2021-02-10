@@ -22,11 +22,15 @@
                 </div>
             </div>
             <div class="mt-2">
-                <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i class="fas fa-plus-circle"></i>
-                    Create new Hobby</a>
-                <a class="btn btn-secondary btn-sm" href="/hobby" role="button" title="List all tags"><i
+                {{-- URL::previous(), https://laravel.com/docs/7.x/urls#accessing-the-current-url --}}
+                <a class="btn btn-secondary btn-sm" href="{{ URL::previous() }}" role="button" title="List all tags"><i
+                        class="fas fa-arrow-left"></i>
+                    Go Previous Page</a>
+                <a class="btn btn-info btn-sm" href="/hobby" role="button" title="List all tags"><i
                         class="fas fa-list"></i>
                     All Hobbies</a>
+                <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i class="fas fa-plus-circle"></i>
+                    Create new Hobby</a>
             </div>
 
         </div>
