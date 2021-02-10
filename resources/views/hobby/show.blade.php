@@ -17,6 +17,11 @@
                         <li class="list-group-item">
                             <b>{{$hobby->name}}</b>
                             <p>{{$hobby->description}}</p>
+                            <p>
+                                @foreach($hobby->tags as $tag)
+                                <a href=""><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                @endforeach
+                            </p>
                         </li>
                     </ul>
                 </div>

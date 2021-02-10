@@ -28,7 +28,10 @@
                                 Hobby</a>
                             @endauth
                             <span class="mx-1">Posted by: {{ $hobby->user->name }}
-                                ({{ $hobby->user->hobbies->count() }})</span>
+                                ({{ $hobby->user->hobbies->count() }})</span><br />
+                            @foreach($hobby->tags as $tag)
+                            <a href=""><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                            @endforeach
                             @auth
                             <form action="/hobby/{{$hobby->id}}" method="POST" class="float-right">
                                 @csrf
