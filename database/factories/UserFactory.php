@@ -18,9 +18,13 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    /* https://laravel.com/docs/7.x/database-testing#writing-factories */
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
+        /* https://github.com/fzaninotto/Faker#fakerprovideren_ustext */
+        'motto' => $faker->realText(30),
+        'about_me' => $faker->realText(30),
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),

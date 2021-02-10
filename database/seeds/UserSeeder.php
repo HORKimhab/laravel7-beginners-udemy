@@ -14,6 +14,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+         /* https://laravel.com/docs/7.x/seeding#using-model-factories */
+        factory(App\User::class, 100)->create();
+
         DB::table('users')->insert([
             'name' => 'Kimhab Coding',
             'email' => 'kimhab.coding@gmail.com',
