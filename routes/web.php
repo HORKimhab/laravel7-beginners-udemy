@@ -32,6 +32,7 @@ Route::get('/starting_page', function () {
 // More about Route::resource --> https://laravel.com/docs/7.x/controllers
 Route::resource('hobby', 'HobbyController');
 Route::resource('tag', 'TagController');
+Route::resource('user', 'UserController');
 
 Auth::routes();
 
