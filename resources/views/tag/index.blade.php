@@ -32,6 +32,9 @@
                                 @method('DELETE')
                                 <input class="btn btn-outline-danger" type="submit" value="Delete">
                             </form>
+                            <a class="float-right mx-1" href="/hobby/tag/{{ $tag->id }}">Used
+                                {{ $tag->hobbies->count() }}
+                                times</a>
                         </li>
                         @endforeach
                     </ul>
