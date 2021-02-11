@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
+use App\Hobby;
 
 class HobbyTagController extends Controller
 {
@@ -28,5 +29,28 @@ class HobbyTagController extends Controller
         ];
 
         return view('hobby.index', $data);
+    }
+
+    /*  Wanna know more about -->Detach & Attach<---
+        https://laravel.com/docs/7.x/eloquent-relationships#updating-many-to-many-relationships
+    */
+    public function detachTag($hobby_id, $tag_id){
+        $hobby = Hobby::find($hobby_id);
+        $tag = Tag::find($tag_id);
+        $hobby->tags()->detach($tag_id);
+
+        return back()->with([
+            'mgs_warning'=> 'The hobby  <b>'. $tag->name. '</b>' . ' is removed.',
+        ]);
+    }
+
+    public function attachTag($hobby_id, $tag_id){
+        $hobby = Hobby::find($hobby_id);
+        $tag = Tag::find($tag_id);
+        $hobby->tags()->attach($tag_id);
+
+        return back()->with([
+            'mgs_success'=> 'The hobby  <b>'. $tag->name. '</b>' . ' is added successfully.',
+        ]);
     }
 }

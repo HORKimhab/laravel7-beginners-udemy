@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Hobby;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class HobbyController extends Controller
 {
@@ -80,9 +83,34 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
-        return view('hobby.show')->with([
+        /* https://stackoverflow.com/questions/40766734/check-if-a-class-is-a-model-in-laravel-5 */
+        // dd($hobby instanceof Collection);
+
+        // dd(is_array($hobby));
+        // dd(gettype($hobby)); // Output: object
+
+        /*  diff()-> convert to collection in laravel
+            https://laravel.com/docs/7.x/collections#method-diff
+        */
+        $allTags = Tag::all();
+        // dd($allTags);
+        $usedTags = $hobby->tags;
+        $availableTags = $allTags->diff($usedTags);
+        // dd($availableTags);
+        // dd($usedTags);
+
+        // $paginator = Hobby::paginate();
+        /* $paginator = Hobby::where('is_delete', 0)->orderBy('created_at', 'DESC')->paginate(10);
+        $data_json = json_decode($paginator ->toJSON());
+        dd($data_json); */
+
+        $data = [
             'hobby' => $hobby,
-        ]);
+            'availableTags' => $availableTags,
+           /*  'paginator' => $paginator, */
+        ];
+
+        return view('hobby.show')->with($data);
     }
 
     /**

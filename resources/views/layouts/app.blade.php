@@ -107,6 +107,14 @@
             </div>
             @endif
 
+            @if ($mgs_warning = Session::get('mgs_warning'))
+            <div class="container">
+                <div class="alert alert-warning" role="alert">
+                    {!! $mgs_warning !!}
+                </div>
+            </div>
+            @endif
+
             {{-- Display The Validation Errors: https://laravel.com/docs/7.x/validation#quick-displaying-the-validation-errors --}}
             @if ($errors->any())
             <div class="container">
