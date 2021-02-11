@@ -70,8 +70,14 @@ class HobbyController extends Controller
         // dd($hobby);
         $hobby->save();
         /* return $this->index(); */ /* Confirm Form Resubmission */
-        return redirect()->route('hobby.index')->with([
+
+        /* return redirect()->route('hobby.index')->with([
             'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is created successfully.',
+        ]); */
+
+        return redirect('/hobby/' . $hobby->id)->with([
+            'mgs_success'=> '<i class="fas fa-hand-point-down"></i> The hobby  <b>'. $hobby->name. '</b>' . ' is created successfully.',
+            'mgs_warning'=> 'Please assign a <b>tag</b> now.',
         ]);
     }
 

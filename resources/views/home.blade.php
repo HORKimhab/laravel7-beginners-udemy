@@ -6,15 +6,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
+                    <h2>Hello {{ auth()->user()->name }}</h2>
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                     @endif
+                    {{ __('You are logged in!') }}<br />
+                    <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i
+                            class="fas fa-plus-circle"></i>
+                        Create new Hobby</a>
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

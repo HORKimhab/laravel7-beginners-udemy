@@ -44,9 +44,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @auth
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('home') ? ' active': '' }}" href="/home">Home</a>
+                        </li>
+                        @endauth
+
+                        {{-- @guest: https://laravel.com/docs/7.x/blade#if-statements --}}
+                        @guest
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('info') ? ' active': '' }}" href="/info">Info</a>
                         </li>
+                        @endguest
+
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('starting_page') ? ' active': '' }}"
                                 href="/starting_page">Starting
