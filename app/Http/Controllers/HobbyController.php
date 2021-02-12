@@ -7,6 +7,7 @@ use App\Hobby;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -65,6 +66,17 @@ class HobbyController extends Controller
             /* max:10, 10 kilobytes */
             'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|dimensions:max_width=400,max_height=300|max:1024',
         ]);
+
+        if($request->image){
+            $image = Image::make($request->image);
+            /* http://image.intervention.io/api/height */
+            if( $image->width() > $image->height()){
+                dd('Landscape');
+            }
+            else{
+                dd('Portrait');
+            }
+        };
 
         $hobby = new Hobby([
             'name'          => $request->name,  /* $request['name'] */
