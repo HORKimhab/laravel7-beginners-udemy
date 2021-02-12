@@ -1,74 +1,68 @@
 @extends('layouts.app')
 
-@section('page_title', 'Hobby')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="card">
-                {{-- <div class="card-header">{{ __('Dashboard') }}
-            </div> --}}
-            @isset($filter)
-                <div class="card-header"><span class="h5">Filter hobbies by </span><span style="font-size: 122%;"
-                        class="badge badge-{{ $filter->style }}">{{ $filter->name }}</span>
-                    <a href="/hobby" class="float-right h6" title="Show all hobbies">All Hobbies</a>
+
+                @isset($filter)
+                <div class="card-header">Filtered hobbies by
+                    <span style="font-size: 130%;" class="badge badge-{{ $filter->style }}">{{ $filter->name }}</span>
+                    <span class="float-right"><a href="/hobby">Show all Hobbies</a></span>
                 </div>
-            @else
-                <div class="card-header h5">All hobbies</div>
-            @endisset
+                @else
+                <div class="card-header">All the hobbies</div>
+                @endisset
 
-            <div class="card-body">
-                {{-- list-group: -->https://getbootstrap.com/docs/4.0/components/list-group/ --}}
-                {{-- Loop | Foreach -->https://laravel.com/docs/master/blade#loops --}}
-
-                <ul class="list-group">
-                    @foreach($hobbies as $hobby)
-                        {{-- <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li> --}}
+                <div class="card-body">
+                    <ul class="list-group">
+                        @foreach($hobbies as $hobby)
                         <li class="list-group-item">
-                            <a href="/hobby/{{ $hobby->id }}" title="Show Details">{{ $hobby->name }}</a>
-                            @auth{{-- Need login to see these feature --}}
-                                <a href="/hobby/{{ $hobby->id }}/edit" title="Click to Edit Hobby"
-                                    class="btn btn-light ml-1"><i class="far fa-edit"></i> Edit
-                                    Hobby</a>
-                            @endauth
-                            <span class="mx-1">Posted by: <a
-                                    href="/user/{{ $hobby->user->id }}">{{ $hobby->user->name }}
-                                    ({{ $hobby->user->hobbies->count() }})</a>
-                            </span><br />
-                            @foreach($hobby->tags as $tag)
-                                <a href="/hobby/tag/{{ $tag->id }}"><span
-                                        class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
-                            @endforeach
+                            <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                <img src="/img/thumb_landscape.jpg" alt="thumb">
+                                {{ $hobby->name }}
+                            </a>
                             @auth
-                                <form action="/hobby/{{ $hobby->id }}" method="POST" class="float-right">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input class="btn btn-outline-danger" type="submit" value="Delete">
-                                </form>
+                            <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i
+                                    class="fas fa-edit"></i> Edit Hobby</a>
+                            @endauth
+                            <span class="mx-2">Posted by: <a
+                                    href="/user/{{ $hobby->user->id }}">{{ $hobby->user->name }}
+                                    ({{ $hobby->user->hobbies->count() }} Hobbies)</a>
+                                <a href="/user/{{ $hobby->user->id }}"><img class="rounded"
+                                        src="/img/thumb_portrait.jpg"></a>
+                            </span>
+                            @auth
+                            <form class="float-right" style="display: inline" action="/hobby/{{ $hobby->id }}"
+                                method="post">
+                                @csrf
+                                @method("DELETE")
+                                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
+                            </form>
                             @endauth
                             <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
+                            <br>
+                            @foreach($hobby->tags as $tag)
+                            <a href="/hobby/tag/{{ $tag->id }}"><span
+                                    class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                            @endforeach
                         </li>
-                    @endforeach
-                </ul>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="mt-2">
-            {{ $hobbies->links() }}
-        </div>
-        @auth
-            <div class="mt-2">
-                <a class="btn btn-primary btn-sm" href="/hobby/create" role="button"><i class="fas fa-plus-circle"></i>
-                    Create new Hobby</a>
-            </div>
-        @endauth
 
+            <div class="mt-3">
+                {{ $hobbies->links() }}
+            </div>
+            @auth
+            <div class="mt-2">
+                <a class="btn btn-success btn-sm" href="/hobby/create"><i class="fas fa-plus-circle"></i> Create new
+                    Hobby</a>
+            </div>
+            @endauth
+        </div>
     </div>
 </div>
-</div>
-
 @endsection
