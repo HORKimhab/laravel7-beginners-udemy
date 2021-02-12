@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Hobby;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -56,8 +57,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        /* $hobbies = Hobby::where(['is_delete' => 0, 'user_id' => auth()->user()->id])
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(10); */
         return view('user.show')->with([
             'user' => $user,
+            /* 'hobbies' => $hobbies, */
         ]);
     }
 
