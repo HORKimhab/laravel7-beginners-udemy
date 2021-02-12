@@ -24,11 +24,11 @@
                             <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
                         </div>
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control {{ $errors->has('description') ? 'border-danger': '' }}"
-                                id="description" name="description" value=" "
-                                rows="5">{{ old('description') }}</textarea>
-                            <small class="form-text text-danger">{!! $errors->first('description') !!}</small>
+                            <label for="image">Image</label>
+                            {{-- https://laravel.com/docs/7.x/validation#working-with-error-messages --}}
+                            <input type="file" class="form-control {{ $errors->has('image') ? 'border-danger' : ''}}"
+                                id="image" name="image" value=" {{ $hobby->image ?? old('image') }}">
+                            <small class="form-text text-danger">{!! $errors->first('image') !!}</small>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
