@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-header">Edit Hobby</div>
                 <div class="card-body">
-                    <form action="/hobby/{{ $hobby->id }}" method="POST">
+                    <form autocomplete="off" action="/hobby/{{ $hobby->id }}" method="POST"
+                        enctype="multipart/form-data">
                         {{-- More: https://laravel.com/docs/7.x/routing#form-method-spoofing --}}
                         @method('PUT')
                         @csrf {{-- 01 --}}
@@ -21,6 +22,13 @@
                             <input type="text" class="form-control {{ $errors->has('name') ? 'border-danger' : ''}}"
                                 id="name" name="name" value="{{ $hobby->name ?? old('name') }}">
                             <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control {{ $errors->has('description') ? 'border-danger': '' }}"
+                                id="description" name="description" value=" "
+                                rows="5">{{ old('description') }}</textarea>
+                            <small class="form-text text-danger">{!! $errors->first('description') !!}</small>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>

@@ -59,6 +59,11 @@ class HobbyController extends Controller
         $request->validate([
             'name'=>'required|min:3',
             'description'=>'required|min:8',
+            /* https://laravel.com/docs/7.x/validation#rule-mimetypes */
+            /* https://laravel.com/docs/7.x/validation#rule-dimensions */
+            /* https://laravel.com/docs/7.x/validation#rule-size */
+            /* max:10, 10 kilobytes */
+            'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|dimensions:max_width=400,max_height=300|max:1024',
         ]);
 
         $hobby = new Hobby([
