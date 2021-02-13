@@ -67,46 +67,19 @@ class HobbyController extends Controller
             'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|dimensions:max_width=1200,max_height=900|max:1024',
         ]);
 
-        if($request->image){
-            $image = Image::make($request->image);
-
-            /* https://laravel.com/docs/7.x/filesystem */
-            $extension = $request->file('image')->extension();
-            $path = "/img/hobbies/";
-
-            /* https://www.w3schools.com/php/func_date_date.asp */
-            $time_image = "-" . date('d-m-Y');
-            // dd($time_image);
-            // dd(public_path(). $path);
-
-            /* http://image.intervention.io/api/height */
-            if( $image->width() > $image->height()){ // Landscape
-                $image->widen(1200) // widen: resize width
-                    ->save(public_path(). $path . $hobby->id . $time_image."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path(). $path . $hobby->id . $time_image . "_pixelated.".$extension);
-                $image = Image::make($request->image);
-
-                $image->widen(60) // widen: resize width
-                     ->save(public_path(). $path . $hobby->id . $time_image . "_thumb.".$extension);
-            }
-            else{
-                 $image->widen(900) // widen: resize width
-                    ->save(public_path() . $path . $hobby->id . $time_image ."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path() . $path . $hobby->id . $time_image . "_pixelated.".$extension);
-                $image = Image::make($request->image);
-
-                $image->widen(60) // widen: resize width
-                    ->save(public_path() . $path . $hobby->id . $time_image ."_thumb.".$extension);
-            }
-        }
-
         $hobby = new Hobby([
             'name'          => $request->name,  /* $request['name'] */
             'description'   => $request['description'],
             'user_id' => auth()->id(),
         ]);
+
+        if($request->image){
+            // Call Function
+            $imageInput = $request->image;
+            $hobby_id = $hobby->id;
+            $extensionImage = $request->file('image');
+            $this->saveImages($imageInput, $hobby_id, $extensionImage);
+        };
 
         // dd($hobby);
         $hobby->save();
@@ -193,39 +166,12 @@ class HobbyController extends Controller
             'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|dimensions:max_width=1200,max_height=900|max:1024',
         ]);
 
-       if($request->image){
-            $image = Image::make($request->image);
-
-            /* https://laravel.com/docs/7.x/filesystem */
-            $extension = $request->file('image')->extension();
-            $path = "/img/hobbies/";
-
-            /* https://www.w3schools.com/php/func_date_date.asp */
-            $time_image = "-" . date('d-m-Y');
-            // dd($time_image);
-            // dd(public_path(). $path);
-
-            /* http://image.intervention.io/api/height */
-            if( $image->width() > $image->height()){ // Landscape
-                $image->widen(1200) // widen: resize width
-                    ->save(public_path(). $path . $hobby->id . $time_image."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path(). $path . $hobby->id . $time_image . "_pixelated.".$extension);
-                $image = Image::make($request->image);
-
-                $image->widen(60) // widen: resize width
-                     ->save(public_path(). $path . $hobby->id . $time_image . "_thumb.".$extension);
-            }
-            else{
-                 $image->widen(900) // widen: resize width
-                    ->save(public_path() . $path . $hobby->id . $time_image ."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path() . $path . $hobby->id . $time_image . "_pixelated.".$extension);
-                $image = Image::make($request->image);
-
-                $image->widen(60) // widen: resize width
-                    ->save(public_path() . $path . $hobby->id . $time_image ."_thumb.".$extension);
-            }
+        if($request->image){
+            // Call Function
+            $imageInput = $request->image;
+            $hobby_id = $hobby->id;
+            $extensionImage = $request->file('image');
+            $this->saveImages($imageInput, $hobby_id, $extensionImage);
         };
 
         $hobby->update([
@@ -254,5 +200,42 @@ class HobbyController extends Controller
         return redirect()->route('hobby.index')->with([
             'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is deleted successfully.',
         ]);
+    }
+
+    public function saveImages($imageInput, $hobby_id, $extensionImage)
+    {
+         $image = Image::make($imageInput);
+
+            /* https://laravel.com/docs/7.x/filesystem */
+            // $extension = $request->file('image')->extension();
+            $extension = $extensionImage->extension();
+            $path = "/img/hobbies/";
+
+            /* https://www.w3schools.com/php/func_date_date.asp */
+            $time_image = "-" . date('d-m-Y');
+            // dd($time_image);
+            // dd(public_path(). $path);
+
+            /* http://image.intervention.io/api/height */
+            if( $image->width() > $image->height()){ // Landscape
+                $image->widen(1200) // widen: resize width
+                    ->save(public_path(). $path . $hobby_id . $time_image."_large.".$extension)
+                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
+                    ->save(public_path(). $path . $hobby_id . $time_image . "_pixelated.".$extension);
+                $image = Image::make($imageInput);
+
+                $image->widen(60) // widen: resize width
+                     ->save(public_path(). $path . $hobby_id . $time_image . "_thumb.".$extension);
+            }
+            else{
+                 $image->widen(900) // widen: resize width
+                    ->save(public_path() . $path . $hobby_id . $time_image ."_large.".$extension)
+                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
+                    ->save(public_path() . $path . $hobby_id . $time_image . "_pixelated.".$extension);
+                $image = Image::make($imageInput);
+
+                $image->widen(60) // widen: resize width
+                    ->save(public_path() . $path . $hobby_id . $time_image ."_thumb.".$extension);
+            }
     }
 }
