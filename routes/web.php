@@ -30,7 +30,7 @@ Route::get('/starting_page', function () {
 
 // 'hobby' is name route
 // More about Route::resource --> https://laravel.com/docs/7.x/controllers
-Route::resource('hobby', 'HobbyController');
+Route::resource('hobby', 'HobbyController')/* ->middleware('auth') */; // middleare('auth') // must login
 Route::resource('tag', 'TagController');
 Route::resource('user', 'UserController');
 
