@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Hobby Detail ' . $hobby->id)
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

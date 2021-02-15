@@ -264,4 +264,22 @@ class HobbyController extends Controller
                     ->save(public_path() . $path . $hobby_id /* . $time_image */ ."_thumb.".$extension);
             }
     }
+
+    public function deleteImage($hobby_id){
+        $path = "/img/hobbies/";
+        $extension = 'jpg';
+
+        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_large.".$extension))
+            unlink(public_path(). $path . $hobby_id /* . $time_image */."_large.".$extension) ; // unlink() remove or delete image
+
+        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_thumb.".$extension))
+            unlink(public_path(). $path . $hobby_id /* . $time_image */."_thumb.".$extension) ; // unlink() remove or delete image
+
+        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_pixelated.".$extension))
+            unlink(public_path(). $path . $hobby_id /* . $time_image */."_pixelated.".$extension) ; // unlink() remove or delete image
+
+        return back()->with([
+            'mgs_success'=> 'The image is deleted successfully.',
+        ]);
+    }
 }

@@ -26,12 +26,15 @@
                             <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
                         </div>
 
+                        @if(file_exists('img/hobbies/' . $hobby->id . '_large.jpg'))
                         <div class="mb-2">
-                            @if(file_exists('img/hobbies/' . $hobby->id . '_large.jpg'))
                             <img style="max-width: 400px; max-height: 300px;"
                                 src="/img/hobbies/{{ $hobby->id }}_large.jpg" alt="Hobby Thumb Not Found">
-                            @endif
+                            <a class="btn btn-outline-danger float-right" href="/delete-image/hobby/{{ $hobby->id }}"
+                                onclick="return confirm('Are you sure to delete this image?');">
+                                Delete</a>
                         </div>
+                        @endif
 
                         <div class="form-group">
                             <label for="image">Image</label>
