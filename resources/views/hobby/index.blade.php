@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'All Hobbies')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -34,11 +36,25 @@
                             <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i
                                     class="fas fa-edit"></i> Edit Hobby</a>
                             @endauth
-                            <span class="mx-2">Posted by: <a
-                                    href="/user/{{ $hobby->user->id }}">{{ $hobby->user->name }}
-                                    ({{ $hobby->user->hobbies->count() }} Hobbies)</a>
+                            <span class="mx-2">
+                                Posted by:
+                                <a href="/user/{{ $hobby->user->id }}">
+                                    {{ $hobby->user->name }}
+                                    ({{ $hobby->user->hobbies->count() }} Hobbies)
+                                </a>
+
+                                @if(file_exists('img/users/' . $hobby->user->id . '_thumb.jpg'))
+
+                                <a title="Show Details" href="/user/{{ $hobby->user->id }}">
+                                    <img class="img-thumbnail rounded" src="/img/users/{{ $hobby->user->id }}_thumb.jpg"
+                                        alt="Hobby Thumb Not Found">
+                                </a>
+
+                                @else
                                 <a href="/user/{{ $hobby->user->id }}"><img class="rounded"
                                         src="/img/thumb_portrait.jpg"></a>
+                                @endif
+
                             </span>
                             @auth
                             <form class="float-right" style="display: inline" action="/hobby/{{ $hobby->id }}"

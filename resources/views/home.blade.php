@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-9">
+                            {{-- auth(): Must Login --}}
                             <h2>Hello {{ auth()->user()->name }}</h2>
                             <h5>Your Motto</h5>
                             <p>
@@ -19,10 +20,27 @@
                             <p>
                                 <p>{{ auth()->user()->about_me ?? '' }}</p>
                             </p>
+                            <p>
+                                <a class="btn btn-primary btn-sm mt-1" href="/user/{{ auth()->user()->id }}/edit"><i
+                                        class="fas fa-edit"></i> Edit
+                                    User</a>
+                            </p>
+
                         </div>
+                        @if(file_exists('img/users/' . auth()->user()->id . '_large.jpg'))
+                        <div class="col-md-3 mb-2">
+                            <a style="max-width: 400px; max-height: 300px;" title="Show Details"
+                                href="/user/{{ auth()->user()->id }}">
+                                <img class="img-fluid img-thumbnail" src="/img/users/{{ auth()->user()->id }}_large.jpg"
+                                    alt="Hobby Thumb Not Found">
+                            </a>
+                        </div>
+                        @else
                         <div class="col-md-3">
                             <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ auth()->user()->name }}">
                         </div>
+                        @endif
+
                     </div>
 
                     @isset($hobbies)

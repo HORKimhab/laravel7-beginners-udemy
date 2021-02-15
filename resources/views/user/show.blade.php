@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Detail User ' . $user->id)
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -35,13 +37,20 @@
                             @endif
                         </div>
                         <div class="col-md-3">
-                            <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ $user->name }}">
+
+                            @if(Auth::user() && file_exists('img/users/' . $user->id . '_large.jpg'))
+                            <img class="img-thumbnail" src="/img/users/{{$user->id}}_large.jpg"
+                                alt="{{ $user->name }} not found">
+                            @endif
+
+                            @if(!Auth::user() && file_exists('img/users/' . $user->id . '_pixelated.jpg'))
+                            <img class="img-thumbnail" src="/img/users/{{ $user->id }}_pixelated.jpg"
+                                alt="{{ $user->name }} not found">
+                            @endif
+
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
 
             <div class="mt-4">
