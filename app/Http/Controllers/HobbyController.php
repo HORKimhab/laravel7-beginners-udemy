@@ -235,7 +235,7 @@ class HobbyController extends Controller
             // $extension = $request->file('image')->extension();
             // $extension = $extensionImage->extension();
             $path = "/img/hobbies/";
-            $extension = '.jpg';
+            $extension = 'jpg';
 
             /* https://www.w3schools.com/php/func_date_date.asp */
             // $time_image = "-" . date('d-m-Y');

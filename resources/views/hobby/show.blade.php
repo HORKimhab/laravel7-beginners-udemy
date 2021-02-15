@@ -33,10 +33,34 @@
                             @endif
                         </div>
                         <div class="col-md-3">
+                            @if(Auth::user() && file_exists('img/hobbies/' . $hobby->id . '_large.jpg'))
+                            <a href="/img/hobbies/{{ $hobby->id }}_large.jpg"
+                                data-lightbox="/img/hobbies/{{ $hobby->id }}_large.jpg" data-title="{{ $hobby->name }}">
+                                <img class="img-fluid" src="/img/hobbies/{{ $hobby->id }}_large.jpg" alt=""
+                                    style="cursor: zoom-in">
+                            </a>
+                            {{-- <i class="fa fa-search-plus"></i> --}}
+
+                            {{-- .img-fluid
+                                Images in Bootstrap are made responsive with .img-fluid. max-width: 100%; and height: auto;
+                                are applied to the image so that it scales with the parent element.
+                                URL: https://getbootstrap.com/docs/4.5/content/images/
+                            --}}
+
+                            @elseif(!Auth::user() && file_exists('img/hobbies/' . $hobby->id . '_pixelated.jpg'))
+                            <a href="/img/hobbies/{{ $hobby->id }}_pixelated.jpg"
+                                data-lightbox="/img/hobbies/{{ $hobby->id }}_pixelated.jpg"
+                                data-title="{{ $hobby->name }}">
+                                <img class="img-fluid" src="/img/hobbies/{{ $hobby->id }}_pixelated.jpg" alt=""
+                                    style="cursor: zoom-in">
+                            </a>
+                            @else
                             <a href="/img/400x300.jpg" data-lightbox="400x300.jpg" data-title="{{ $hobby->name }}">
                                 <img class="img-fluid" src="/img/400x300.jpg" alt="">
                             </a>
                             <i class="fa fa-search-plus"></i> Click image to enlarge
+                            @endif
+                            <span>{{ $hobby->name }}</span>
                         </div>
                     </div>
                 </div>

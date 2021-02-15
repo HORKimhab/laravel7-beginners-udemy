@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Edit Hobby ' . $hobby->id)
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -23,6 +25,14 @@
                                 id="name" name="name" value="{{ $hobby->name ?? old('name') }}">
                             <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
                         </div>
+
+                        <div class="mb-2">
+                            @if(file_exists('img/hobbies/' . $hobby->id . '_large.jpg'))
+                            <img style="max-width: 400px; max-height: 300px;"
+                                src="/img/hobbies/{{ $hobby->id }}_large.jpg" alt="Hobby Thumb Not Found">
+                            @endif
+                        </div>
+
                         <div class="form-group">
                             <label for="image">Image</label>
                             {{-- https://laravel.com/docs/7.x/validation#working-with-error-messages --}}
