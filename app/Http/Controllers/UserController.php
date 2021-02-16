@@ -7,6 +7,7 @@ use App\Hobby;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -80,6 +81,16 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update', $user), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         return view('user.edit')->with([
             'user' => $user,
         ]);
@@ -94,6 +105,16 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update', $user), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
             'name'=>'required|min:3',
@@ -135,7 +156,15 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('delete', $user), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
     }
 
     public function saveImages($imageInput, $user_id/* , $extensionImage */)

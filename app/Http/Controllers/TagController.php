@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TagController extends Controller
 {
@@ -89,6 +90,16 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         return view('tag.edit')->with([
             'tag' => $tag,
         ]);
@@ -103,6 +114,16 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
             'name'=>'required|min:3',
@@ -129,6 +150,16 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
          $oldName = $tag->name;
         /* https://laravel.com/docs/7.x/queries#retrieving-results */
         $delete_tag = DB::table('tags')->where('id', $tag->id)->update(['is_delete'=>1]);
