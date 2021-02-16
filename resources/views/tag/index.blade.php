@@ -23,18 +23,26 @@
                         <li class="list-group-item">
                             <span style="font-size: 130%" class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span>
                             {{-- <a href="/tag/{{$tag->id}}" title="Show Details">{{ $tag->name }}</a> --}}
+
                             {{-- @auth --}}
+
+                            @can('update', $tag)
+                            {{-- https://laravel.com/docs/7.x/authorization#via-blade-templates --}}
                             <a href="/tag/{{$tag->id}}/edit" title="Click to Edit tag"
                                 class="btn btn-outline-primary ml-1"><i class="far fa-edit"></i> Edit
                                 tag</a>
+                            @endcan
 
-
+                            @can('delete', $tag)
+                            {{-- https://laravel.com/docs/7.x/authorization#via-blade-templates --}}
                             <form action="/tag/{{$tag->id}}" method="POST" class="float-right">
                                 @csrf
                                 @method('DELETE')
                                 <input class="btn btn-outline-danger" type="submit" value="Delete">
                             </form>
                             {{-- @endauth --}}
+                            @endcan
+
                             <a class="float-right mx-1" href="/hobby/tag/{{ $tag->id }}">Used
                                 {{ $tag->hobbies->count() }}
                                 times</a>
@@ -46,9 +54,12 @@
             </div>
             <div class="mt-2">
                 {{-- @auth --}}
+                @can('create', $tag)
+                {{-- https://laravel.com/docs/7.x/authorization#via-blade-templates --}}
                 <a class="btn btn-primary btn-sm" href="/tag/create" role="button"><i class="fas fa-plus-circle"></i>
                     Create new tag</a>
                 {{-- @endauth --}}
+                @endcan
             </div>
 
         </div>
@@ -56,4 +67,3 @@
 </div>
 
 @endsection
-

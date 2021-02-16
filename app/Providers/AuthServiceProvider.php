@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('connect_hobbyTag', function($user, $hobby){
+            return $user->id === $hobby->user_id || auth()->user()->role === 'admin';
+        });
+        /*  Gate::define
+            https://laravel.com/docs/7.x/authorization#writing-gates
+        */
+
+        /* https://laravel.com/docs/7.x/authentication#adding-custom-user-providers */
     }
 }
