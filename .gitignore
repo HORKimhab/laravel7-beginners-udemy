@@ -10,3 +10,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/public/img/hobbies/475_large.jpg
+/public/img/hobbies/475_pixelated.jpg
+/public/img/hobbies/475_thumb.jpg
+/public/img/users/1_large.jpg
+/public/img/users/1_pixelated.jpg
+/public/img/users/1_thumb.jpg
+/storage/debugbar/.gitignore
