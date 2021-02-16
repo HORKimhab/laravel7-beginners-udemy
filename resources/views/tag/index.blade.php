@@ -23,7 +23,7 @@
                         <li class="list-group-item">
                             <span style="font-size: 130%" class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span>
                             {{-- <a href="/tag/{{$tag->id}}" title="Show Details">{{ $tag->name }}</a> --}}
-                            @auth
+                            {{-- @auth --}}
                             <a href="/tag/{{$tag->id}}/edit" title="Click to Edit tag"
                                 class="btn btn-outline-primary ml-1"><i class="far fa-edit"></i> Edit
                                 tag</a>
@@ -34,7 +34,7 @@
                                 @method('DELETE')
                                 <input class="btn btn-outline-danger" type="submit" value="Delete">
                             </form>
-                            @endauth
+                            {{-- @endauth --}}
                             <a class="float-right mx-1" href="/hobby/tag/{{ $tag->id }}">Used
                                 {{ $tag->hobbies->count() }}
                                 times</a>
@@ -45,10 +45,10 @@
                 </div>
             </div>
             <div class="mt-2">
-                @auth
+                {{-- @auth --}}
                 <a class="btn btn-primary btn-sm" href="/tag/create" role="button"><i class="fas fa-plus-circle"></i>
                     Create new tag</a>
-                @endauth
+                {{-- @endauth --}}
             </div>
 
         </div>
@@ -56,3 +56,4 @@
 </div>
 
 @endsection
+
