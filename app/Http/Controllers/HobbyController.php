@@ -7,6 +7,7 @@ use App\Hobby;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
@@ -166,6 +167,16 @@ class HobbyController extends Controller
      */
     public function edit(Hobby $hobby)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         return view('hobby.edit')->with([
             'hobby' => $hobby,
         ]);
@@ -180,6 +191,16 @@ class HobbyController extends Controller
      */
     public function update(Request $request, Hobby $hobby)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('update'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
             'name'=>'required|min:3',
@@ -219,6 +240,16 @@ class HobbyController extends Controller
      */
     public function destroy(Hobby $hobby)
     {
+        /*  abort_unless
+            https://laravel.com/docs/7.x/helpers#method-abort-unless
+        */
+
+        abort_unless(Gate::allows('delete'), 403);
+
+        /*  Gate::allows
+            https://laravel.com/docs/7.x/authorization#authorizing-actions-via-gates
+        */
+
         $oldName = $hobby->name;
         /* https://laravel.com/docs/7.x/queries#retrieving-results */
         $delete_hobby = DB::table('hobbies')->where('id', $hobby->id)->update(['is_delete'=>1]);
