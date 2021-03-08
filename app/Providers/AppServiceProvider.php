@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*  primary key is too long
+            https://laravel.com/docs/master/migrations#index-lengths-mysql-mariadb
+        */
+        Schema::defaultStringLength(191);
     }
 }

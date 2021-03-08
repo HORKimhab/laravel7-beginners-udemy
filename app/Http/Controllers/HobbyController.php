@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 
 
-class HobbyController extends Controller
-{
+class HobbyController extends Controller {
     // Check Login
     // https://laravel.com/docs/7.x/authentication#protecting-routes
-    public function __construct(){
+    public function __construct() {
         $this->middleware('auth')->except(['index', 'show']);
     }
     /**
@@ -25,8 +24,7 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         /* Paginate: https://laravel.com/docs/7.x/pagination#paginating-eloquent-results */
         // $hobbies = Hobby::all()->where('is_delete', 0);
         // $hobbies = Hobby::where('is_delete', 0)->paginate(10);
@@ -58,7 +56,7 @@ class HobbyController extends Controller
         dd($extension); */
 
         $data = [
-            'hobbies'=> $hobbies
+            'hobbies' => $hobbies
         ];
 
         return view('hobby.index')->with($data);
@@ -69,8 +67,7 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('hobby.create');
     }
 
@@ -80,12 +77,11 @@ class HobbyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
-            'name'=>'required|min:3',
-            'description'=>'required|min:8',
+            'name' => 'required|min:3',
+            'description' => 'required|min:8',
             /* https://laravel.com/docs/7.x/validation#rule-mimetypes */
             /* https://laravel.com/docs/7.x/validation#rule-dimensions */
             /* https://laravel.com/docs/7.x/validation#rule-size */
@@ -99,7 +95,7 @@ class HobbyController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        if($request->image){
+        if ($request->image) {
             // Call Function
             $imageInput = $request->image;
             $hobby_id = $hobby->id;
@@ -116,8 +112,8 @@ class HobbyController extends Controller
         ]); */
 
         return redirect('/hobby/' . $hobby->id)->with([
-            'mgs_success'=> '<i class="fas fa-hand-point-down"></i> The hobby  <b>'. $hobby->name. '</b>' . ' is created successfully.',
-            'mgs_warning'=> 'Please assign a <b>tag</b> now.',
+            'mgs_success' => '<i class="fas fa-hand-point-down"></i> The hobby  <b>' . $hobby->name . '</b>' . ' is created successfully.',
+            'mgs_warning' => 'Please assign a <b>tag</b> now.',
         ]);
     }
 
@@ -127,8 +123,7 @@ class HobbyController extends Controller
      * @param  \App\Hobby  $hobby
      * @return \Illuminate\Http\Response
      */
-    public function show(Hobby $hobby)
-    {
+    public function show(Hobby $hobby) {
         /* https://stackoverflow.com/questions/40766734/check-if-a-class-is-a-model-in-laravel-5 */
         // dd($hobby instanceof Collection);
 
@@ -153,7 +148,7 @@ class HobbyController extends Controller
         $data = [
             'hobby' => $hobby,
             'availableTags' => $availableTags,
-           /*  'paginator' => $paginator, */
+            /*  'paginator' => $paginator, */
         ];
 
         return view('hobby.show')->with($data);
@@ -165,8 +160,7 @@ class HobbyController extends Controller
      * @param  \App\Hobby  $hobby
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hobby $hobby)
-    {
+    public function edit(Hobby $hobby) {
         /*  abort_unless
             https://laravel.com/docs/7.x/helpers#method-abort-unless
         */
@@ -189,8 +183,7 @@ class HobbyController extends Controller
      * @param  \App\Hobby  $hobby
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hobby $hobby)
-    {
+    public function update(Request $request, Hobby $hobby) {
         /*  abort_unless
             https://laravel.com/docs/7.x/helpers#method-abort-unless
         */
@@ -203,16 +196,16 @@ class HobbyController extends Controller
 
         // Validation: https://laravel.com/docs/7.x/validation
         $request->validate([
-            'name'=>'required|min:3',
-            'description'=>'required|min:8',
-             /* https://laravel.com/docs/7.x/validation#rule-mimetypes */
+            'name' => 'required|min:3',
+            'description' => 'required|min:8',
+            /* https://laravel.com/docs/7.x/validation#rule-mimetypes */
             /* https://laravel.com/docs/7.x/validation#rule-dimensions */
             /* https://laravel.com/docs/7.x/validation#rule-size */
             /* max:10, 10 kilobytes */
             'image' => 'required|mimes:jpeg,bmp,png,jpg,gif|dimensions:max_width=1200,max_height=900|max:1024',
         ]);
 
-        if($request->image){
+        if ($request->image) {
             // Call Function
             $imageInput = $request->image;
             $hobby_id = $hobby->id;
@@ -228,7 +221,7 @@ class HobbyController extends Controller
 
         /* return $this->index(); */ /* Confirm Form Resubmission */
         return redirect()->route('hobby.index')->with([
-            'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is updated successfully.',
+            'mgs_success' => 'The hobby  <b>' . $hobby->name . '</b>' . ' is updated successfully.',
         ]);
     }
 
@@ -238,8 +231,7 @@ class HobbyController extends Controller
      * @param  \App\Hobby  $hobby
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hobby $hobby)
-    {
+    public function destroy(Hobby $hobby) {
         /*  abort_unless
             https://laravel.com/docs/7.x/helpers#method-abort-unless
         */
@@ -252,65 +244,63 @@ class HobbyController extends Controller
 
         $oldName = $hobby->name;
         /* https://laravel.com/docs/7.x/queries#retrieving-results */
-        $delete_hobby = DB::table('hobbies')->where('id', $hobby->id)->update(['is_delete'=>1]);
+        $delete_hobby = DB::table('hobbies')->where('id', $hobby->id)->update(['is_delete' => 1]);
         return redirect()->route('hobby.index')->with([
-            'mgs_success'=> 'The hobby  <b>'. $hobby->name. '</b>' . ' is deleted successfully.',
+            'mgs_success' => 'The hobby  <b>' . $hobby->name . '</b>' . ' is deleted successfully.',
         ]);
     }
 
-    public function saveImages($imageInput, $hobby_id/* , $extensionImage */)
-    {
-         $image = Image::make($imageInput);
+    public function saveImages($imageInput, $hobby_id/* , $extensionImage */) {
+        $image = Image::make($imageInput);
 
-            /* https://laravel.com/docs/7.x/filesystem */
-            // $extension = $request->file('image')->extension();
-            // $extension = $extensionImage->extension();
-            $path = "/img/hobbies/";
-            $extension = 'jpg';
-
-            /* https://www.w3schools.com/php/func_date_date.asp */
-            // $time_image = "-" . date('d-m-Y');
-            // dd($time_image);
-            // dd(public_path(). $path);
-
-            /* http://image.intervention.io/api/height */
-            if( $image->width() > $image->height()){ // Landscape
-                $image->widen(1200) // widen: resize width
-                    ->save(public_path(). $path . $hobby_id /* . $time_image */."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path(). $path . $hobby_id /* . $time_image */ . "_pixelated.".$extension);
-                $image = Image::make($imageInput);
-
-                $image->widen(60) // widen: resize width
-                     ->save(public_path(). $path . $hobby_id /* . $time_image */ . "_thumb.".$extension);
-            }
-            else{
-                 $image->widen(900) // widen: resize width
-                    ->save(public_path() . $path . $hobby_id /* . $time_image */ ."_large.".$extension)
-                    ->widen(400)->pixelate(12) // apply pixelation effect | burt image
-                    ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_pixelated.".$extension);
-                $image = Image::make($imageInput);
-
-                $image->widen(60) // widen: resize width
-                    ->save(public_path() . $path . $hobby_id /* . $time_image */ ."_thumb.".$extension);
-            }
-    }
-
-    public function deleteImage($hobby_id){
+        /* https://laravel.com/docs/7.x/filesystem */
+        // $extension = $request->file('image')->extension();
+        // $extension = $extensionImage->extension();
         $path = "/img/hobbies/";
         $extension = 'jpg';
 
-        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_large.".$extension))
-            unlink(public_path(). $path . $hobby_id /* . $time_image */."_large.".$extension) ; // unlink() remove or delete image
+        /* https://www.w3schools.com/php/func_date_date.asp */
+        // $time_image = "-" . date('d-m-Y');
+        // dd($time_image);
+        // dd(public_path(). $path);
 
-        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_thumb.".$extension))
-            unlink(public_path(). $path . $hobby_id /* . $time_image */."_thumb.".$extension) ; // unlink() remove or delete image
+        /* http://image.intervention.io/api/height */
+        if ($image->width() > $image->height()) { // Landscape
+            $image->widen(1200) // widen: resize width
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_large." . $extension)
+                ->widen(400)->pixelate(12) // apply pixelation effect | burt image
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_pixelated." . $extension);
+            $image = Image::make($imageInput);
 
-        if(file_exists(public_path(). $path . $hobby_id /* . $time_image */."_pixelated.".$extension))
-            unlink(public_path(). $path . $hobby_id /* . $time_image */."_pixelated.".$extension) ; // unlink() remove or delete image
+            $image->widen(60) // widen: resize width
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_thumb." . $extension);
+        } else {
+            $image->widen(900) // widen: resize width
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_large." . $extension)
+                ->widen(400)->pixelate(12) // apply pixelation effect | burt image
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_pixelated." . $extension);
+            $image = Image::make($imageInput);
+
+            $image->widen(60) // widen: resize width
+                ->save(public_path() . $path . $hobby_id /* . $time_image */ . "_thumb." . $extension);
+        }
+    }
+
+    public function deleteImage($hobby_id) {
+        $path = "/img/hobbies/";
+        $extension = 'jpg';
+
+        if (file_exists(public_path() . $path . $hobby_id /* . $time_image */ . "_large." . $extension))
+            unlink(public_path() . $path . $hobby_id /* . $time_image */ . "_large." . $extension); // unlink() remove or delete image
+
+        if (file_exists(public_path() . $path . $hobby_id /* . $time_image */ . "_thumb." . $extension))
+            unlink(public_path() . $path . $hobby_id /* . $time_image */ . "_thumb." . $extension); // unlink() remove or delete image
+
+        if (file_exists(public_path() . $path . $hobby_id /* . $time_image */ . "_pixelated." . $extension))
+            unlink(public_path() . $path . $hobby_id /* . $time_image */ . "_pixelated." . $extension); // unlink() remove or delete image
 
         return back()->with([
-            'mgs_success'=> 'The image is deleted successfully.',
+            'mgs_success' => 'The image is deleted successfully.',
         ]);
     }
 }
